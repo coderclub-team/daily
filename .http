@@ -1,0 +1,174 @@
+
+###
+POST  {{baseUrl}}/auth/login/request
+Content-Type: application/json
+
+{
+    "phone_number": "9944781003"
+}
+
+###
+POST  {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+    "phone_number": "9944781003",
+    "one_time_password":"6838"
+}
+
+###
+POST  {{baseUrl}}/auth/register?hub_id=512641d8-2566-4c78-838d-b0dd85d73434
+Content-Type: application/json
+
+{
+    "phone_number": "9944781003"
+}
+
+###
+POST   {{baseUrl}}/auth/verify
+Content-Type: application/json
+
+{
+    "phone_number": "9944781003",
+    "one_time_password": "9882"
+}
+
+###
+
+POST  {{baseUrl}}/auth/verify/request
+Content-Type: application/json
+
+{
+    "phone_number": "9944781003"
+}
+
+###
+GET {{baseUrl}}/finono/transactions
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+
+###
+
+POST {{baseUrl}}/finono/credit
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "payment_id":"683973nshjs",
+    "payment_type": "UPI",
+    "transaction_amount": 200
+}
+###
+GET {{baseUrl}}/customers/{{customer_id}}/addresses
+Authorization: Bearer {{token}}
+
+
+###
+POST {{baseUrl}}/customers/{{customer_id}}/addresses
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "street": "123 Main Street",  
+  "city": "Cityville",
+  "state": "Stateville",
+  "zip": "12345",
+  "apartment": "Apt 4B"
+}
+
+###
+POST {{baseUrl}}/payment-intents/create/request
+Content-Type: application/json
+
+{
+    "amount": 100,
+    "currency": "INR",
+    "payment_method_type": "card",
+    "description": "Test Payment",
+    "customer_id": "f08e87a1-ce7b-4d8a-b851-dd9e4a3ba7ba",
+    "receipt": "abc123"
+}
+
+######
+GET {{baseUrl}}/products/categories
+
+###
+GET {{baseUrl}}/products/categories/1/products
+
+###
+
+
+
+###
+
+GET {{baseUrl}}/customers/{{customer_id}}/subscriptions
+Authorization: Bearer {{token}}
+
+###
+POST {{baseUrl}}/customers/{{customer_id}}/subscriptions
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "product_id": "1a4eec1c-2717-4abc-8e5b-8417c82e988f",
+  "frequency_type": "interval",
+ "days_and_quantity": {
+    "monday":0,
+    "tuesday":1,
+    "wednesday":1,
+    "thursday":1,
+    "friday":1,
+    "saturday":2,
+    "sunday":1
+  }
+,
+"delivery_intervals":1,
+  
+  "variant_id":"a4b391b1-6539-4ca6-a87e-2399b09e5338",
+  "start_date":"2023-09-20T02:47:01.471Z"
+}
+
+###
+
+DELETE {{baseUrl}}/subscriptions/d492a2d8-93f1-43fa-8fd3-e03ff9e9b46d
+
+###
+GET {{baseUrl}}/customers/{{customer_id}}/orders
+Authorization: Bearer {{token}}
+
+###
+GET {{baseUrl}}/customers/{{customer_id}}/orders/816015e9-1054-4f09-85d6-453038508f41
+Authorization: Bearer {{token}}
+
+
+###
+
+POST  {{baseUrl}}/customers/{{customer_id}}/orders
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "billing_address_id": "462c608a-3d70-41cc-b3f7-5652eb08d191",
+  "shipping_address_id": "462c608a-3d70-41cc-b3f7-5652eb08d191",
+  "payment_method": "debit card",
+  "transaction_id":"5c812be0-5f3e-4eb0-8939-ca42a2f8c4f2 ",
+  "total": 1000,
+  "order_items_line": [
+    {
+      "item_id": "1a4eec1c-2717-4abc-8e5b-8417c82e988f",
+      "item_variant_id": "a4b391b1-6539-4ca6-a87e-2399b09e5338",
+      "subtotal": 322,
+      "quantity": 1,
+      "total": 1000
+    }
+  ]
+
+}
+
+###
+
+
+
+
+

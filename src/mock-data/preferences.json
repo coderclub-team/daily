@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Ring the doorbell",
+    "description": "Ring the doorbell and leave the package at the door"
+  },
+  {
+    "title": "Knock on the door",
+    "description": "Knock on the door and leave the package at the door"
+  },
+  {
+    "title": "Leave the package at the door",
+    "description": "Leave the package at the door"
+  },
+  {
+    "title": "Leave the package in the mailbox",
+    "description": "Leave the package in the mailbox"
+  },
+  {
+    "title": "Leave the package in the milk basket",
+    "description": "Leave the package in the milk basket"
+  }
+]

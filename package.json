@@ -22,7 +22,7 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
-    "@prisma/client": "^4.14.1",
+    "@prisma/client": "^5.3.1",
     "@tanstack/react-query": "^4.18.0",
     "@trpc/client": "^10.38.3",
     "@trpc/next": "^10.38.3",
@@ -30,14 +30,18 @@
     "@trpc/server": "^10.38.3",
     "clsx": "^2.0.0",
     "i18next": "^22.4.13",
+    "jsonwebtoken": "^9.0.2",
     "next": "^13.4.8",
     "next-i18next": "^13.2.2",
+    "razorpay": "^2.9.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-i18next": "^12.2.0",
     "superjson": "^1.12.4",
     "todomvc-app-css": "^2.3.0",
     "todomvc-common": "^1.0.5",
+    "uuid": "^9.0.1",
+    "yup": "^1.2.0",
     "zod": "^3.0.0"
   },
   "devDependencies": {
@@ -53,5 +57,8 @@
   },
   "publishConfig": {
     "access": "restricted"
+  },
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   }
 }

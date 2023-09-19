@@ -4,6 +4,18 @@ import { i18n } from 'next-i18next.config';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { prisma } from './prisma';
 
+ function decodeAndVerifyJwtToken(token?: string) {
+  return new Promise<{id:string,name:string}>((resolve, reject) => {
+    resolve({
+      id: '123',
+      name: 'John Doe',
+    })
+  });
+
+}
+
+
+
 /**
  * Defines your inner context shape.
  * Add fields here that the inner context brings.
@@ -24,10 +36,22 @@ export interface CreateInnerContextOptions
  * @see https://trpc.io/docs/context#inner-and-outer-context
  */
 export async function createInnerTRPCContext(opts?: CreateInnerContextOptions) {
+  async function getUserFromHeader() {
+    if (opts?.req?.headers.authorization) {
+      const user = await decodeAndVerifyJwtToken(
+        // opts?.req.headers.authorization.split(' ')[1],
+      );
+      return user;
+    }
+    return null;
+  }
+  const user = await getUserFromHeader();
   return {
     prisma,
     task: prisma.task,
+    customer:prisma.customer,
     ...opts,
+    user
   };
 }
 

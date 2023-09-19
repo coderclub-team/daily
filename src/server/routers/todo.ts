@@ -9,6 +9,7 @@ export const todoRouter = router({
       },
     });
   }),
+
   add: baseProcedure
     .input(
       z.object({
@@ -17,6 +18,7 @@ export const todoRouter = router({
       }),
     )
     .mutation(async ({ ctx, input }) => {
+      
       const todo = await ctx.task.create({
         data: input,
       });

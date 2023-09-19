@@ -1,0 +1,20 @@
+[
+  {
+    "email": "sophia@yopmail.com",
+    "password": "Asdf@123$",
+    "name": "Sophia",
+    "phone_number": "1234567890"
+  },
+  {
+    "email": "kishor@yopmail.com",
+    "password": "Asdf@123$",
+    "name": "Kishor",
+    "phone_number": "1234567891"
+  },
+  {
+    "email": "mailtoarull@gmail.com",
+    "password": "Asdf@123$",
+    "name": "Arul",
+    "phone_number": "9944781003"
+  }
+]

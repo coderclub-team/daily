@@ -2,9 +2,10 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 datasource db {
-  provider = "postgres"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
 
 generator client {
   provider = "prisma-client-js"
@@ -18,3 +19,537 @@ model Task {
   createdAt DateTime @unique @default(now())
   // updatedAt DateTime @unique @default(now())
 }
+enum TransactionType {
+  CREDIT
+  DEBIT
+}
+
+enum ProductType {
+  SIMPLE
+  VARIABLE
+}
+
+enum Status {
+  PUBLISH
+  DRAFT
+  TRASH
+}
+
+enum OrderStatus {
+  PENDING_PAYMENT
+  FAILED
+  PROCESSING
+  COMPLETED
+  ON_HOLD
+  CANCELLED
+  REFUNDED
+  PENDING
+  BACKORDER
+  PAYMENT_FAILED
+  PAYMENT_REVIEW
+  COMPLETED_AND_PAID
+}
+
+model Hub {
+  id         String    @id @unique @default(uuid())
+  name       String
+  address    Address?
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  deleted_at DateTime?
+  created_by String?
+  updated_by String?
+  deleted_by String?
+
+  customers Customer[]
+
+  @@map("hubs")
+}
+
+model Customer {
+  id              String          @id @unique @default(uuid())
+  phone_number    String          @unique
+  email           String?         @unique
+  name            String?
+  password        String?
+  address         Address?
+  wallet_registry WalletRegistry?
+  created_at      DateTime        @default(now())
+  updated_at      DateTime        @updatedAt
+  deleted_at      DateTime?
+  created_by      String?
+  updated_by      String?
+  deleted_by      String?
+
+  hub_id String?
+  hub    Hub?    @relation(fields: [hub_id], references: [id], onDelete: SetNull, onUpdate: Cascade)
+
+  sessions Session?
+
+  is_email_verified   Boolean @default(false)
+  is_phone_verified   Boolean @default(false)
+  is_active           Boolean @default(true)
+  is_delete_requested Boolean @default(false)
+
+  one_time_password OneTimePassword?
+  subscriptions     Subscription[]
+
+  is_on_vacation      Boolean   @default(false)
+  vacation_start_date DateTime?
+  vacation_end_date   DateTime?
+
+  delivery_preference_id String?
+  delivery_preference    DeliveryPreference? @relation(fields: [delivery_preference_id], references: [id])
+
+  is_cod_allowed Boolean @default(true)
+
+  orders Order[]
+
+  @@map("customers")
+}
+
+model Session {
+  id            String    @id @unique @default(uuid())
+  device_id     String?
+  last_login    DateTime?
+  last_logout   DateTime?
+  last_ip       String?
+  last_device   String?
+  last_location String?
+  customer_id   String?   @unique
+  customers     Customer? @relation(fields: [customer_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @updatedAt
+  deleted_at    DateTime?
+  created_by    String?
+  updated_by    String?
+  deleted_by    String?
+  test_field    String    @default("test")
+
+  @@map("sessions")
+}
+
+model Address {
+  id        String  @id @unique @default(uuid())
+  door_no   String?
+  floor_no  String?
+  apartment String? // New field for door/block or apartment number
+
+  street String
+  city   String
+  state  String
+  zip    String
+
+  //********** */
+  name            String?
+  email           String?
+  phone           String?
+  //********** */
+  customer_id     String?   @unique
+  customer        Customer? @relation(fields: [customer_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  hub_id          String?   @unique
+  hub             Hub?      @relation(fields: [hub_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  latitude        Float?
+  longitude       Float?
+  created_at      DateTime  @default(now())
+  updated_at      DateTime  @updatedAt
+  deleted_at      DateTime?
+  created_by      String?
+  updated_by      String?
+  deleted_by      String?
+  billing_orders  Order[]   @relation("BillingAddress")
+  shipping_orders Order[]   @relation("ShippingAddress")
+
+  @@map("addresses")
+}
+
+model WalletRegistry {
+  id           String              @id @unique @default(uuid())
+  wallet_id    String?             @unique
+  customer     Customer?           @relation(fields: [customer_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  customer_id  String?             @unique
+  balance      Decimal?            @default(0.00) @db.Decimal(10, 2)
+  transactions WalletTransaction[]
+  created_at   DateTime            @default(now())
+  updated_at   DateTime            @updatedAt
+  deleted_at   DateTime?
+  created_by   String?
+  updated_by   String?
+  deleted_by   String?
+
+  @@map("wallet_registries")
+}
+
+model WalletTransaction {
+  id                 String          @id @unique @default(uuid())
+  transaction_id     String?         @unique
+  wallet_registry_id String
+  wallet_registry    WalletRegistry? @relation(fields: [wallet_registry_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  transaction_type   TransactionType
+  transaction_amount Decimal         @default(0.00) @db.Decimal(10, 2)
+  payment_id         String @unique
+  payment_type       String?
+  created_at         DateTime        @default(now())
+  updated_at         DateTime        @updatedAt
+  deleted_at         DateTime?
+  created_by         String?
+  updated_by         String?
+  deleted_by         String?
+
+  status Status @default(DRAFT) // "publish", "draft" ,'trash'
+
+  @@map("wallet_transactions")
+}
+
+model OneTimePassword {
+  id          String    @id @unique @default(uuid())
+  customer_id String?   @unique
+  customer    Customer? @relation(fields: [customer_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  otp         String
+  otp_type    String
+  otp_expiry  DateTime
+  is_used     Boolean   @default(false)
+  updated_at  DateTime  @updatedAt
+
+  @@map("one_time_passwords")
+}
+
+model Dimention {
+  id               String             @id @unique @default(uuid())
+  length           Decimal?           @default(0.00) @db.Decimal(10, 1)
+  width            Decimal?           @default(0.00) @db.Decimal(10, 1)
+  height           Decimal?           @default(0.00) @db.Decimal(10, 1)
+  unit             String?
+  products         Product[]
+  product_variants ProductVariation[]
+
+  @@map("dimention")
+}
+
+model ProductCategory {
+  id                String            @id @unique @default(uuid())
+  name              String
+  description       String?
+  image_url         String?
+  count             Int?              @default(0)
+  parent_id         String?
+  sort_order        Int?              @default(0)
+  parent            ProductCategory?  @relation("Parent", fields: [parent_id], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  parent_categories ProductCategory[] @relation("Parent")
+  products          Product[]
+
+  @@map("product_categories")
+}
+
+model File {
+  id                       String         @id @unique @default(uuid())
+  name                     String?
+  url                      String
+  product                  Product[]
+  subscription_voice_notes Subscription[]
+
+  @@map("files")
+}
+
+model Product {
+  id              String           @id @unique @default(uuid())
+  title           String
+  description     String?
+  image_id        String?
+  image           File?            @relation(fields: [image_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  type            ProductType      @default(SIMPLE)
+  status          Status           @default(DRAFT) // "publish", "draft" ,'trash'
+  reviews_allowed Boolean          @default(true)
+  average_rating  Decimal?         @default(0.00) @db.Decimal(10, 2)
+  rating_count    Int?             @default(0)
+  category_id     String?
+  category        ProductCategory? @relation(fields: [category_id], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  size            String?
+  sku             String? //product_name + -volume
+  regular_price   Decimal          @default(0.00) @db.Decimal(10, 2)
+  sale_price      Decimal?         @default(0.00) @db.Decimal(10, 2)
+  on_sale         Boolean          @default(false)
+  sale_starts_at  DateTime?
+  sale_ends_at    DateTime?
+
+  taxable            Boolean    @default(false)
+  tax_class          String?
+  tax_status         String?
+  manage_stock       Boolean    @default(true)
+  stock_quantity     Int?       @default(0)
+  in_stock           Boolean    @default(true)
+  backorders_allowed Boolean    @default(false)
+  backordered        Boolean    @default(true)
+  purchaseable       Boolean    @default(true)
+  featured           Boolean    @default(false)
+  weight             Decimal?   @default(0.00) @db.Decimal(10, 3)
+  dimension_id       String?
+  dimensions         Dimention? @relation(fields: [dimension_id], references: [id])
+  bundle_sizes       Int        @default(1)
+
+  attributes String?
+  variations ProductVariation[]
+  created_at DateTime           @default(now())
+  updated_at DateTime           @updatedAt
+  deleted_at DateTime?
+  created_by String?
+  updated_by String?
+  deleted_by String?
+
+  subscriptions Subscription[]
+  order_items   OrderItem[]
+
+  @@map("products")
+}
+
+model ProductVariation {
+  id                 String     @id @unique @default(uuid())
+  stock              Int?       @default(0)
+  sku                String? //product_name + -volume
+  price              Decimal    @default(0.00) @db.Decimal(10, 2)
+  regular_price      Decimal    @default(0.00) @db.Decimal(10, 2)
+  sale_price         Decimal?   @default(0.00) @db.Decimal(10, 2)
+  taxable            Boolean    @default(false)
+  tax_class          String?
+  tax_status         String?
+  manage_stock       Boolean    @default(true)
+  stock_quantity     Int?       @default(0)
+  in_stock           Boolean    @default(true)
+  backorders_allowed Boolean    @default(false)
+  backordered        Boolean    @default(true)
+  purchaseable       Boolean    @default(true)
+  featured           Boolean    @default(false)
+  on_sale            Boolean    @default(false)
+  sale_starts_at     DateTime?
+  sale_ends_at       DateTime?
+  weight             Decimal?   @default(0.00) @db.Decimal(10, 3)
+  dimension_id       String?
+  dimensions         Dimention? @relation(fields: [dimension_id], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  bundle_sizes       Int        @default(1)
+
+  product_id String
+  product    Product @relation(fields: [product_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  //   attributes       
+  size         String?
+  default      Boolean        @default(false)
+  subscription Subscription[]
+
+  order_items OrderItem[]
+
+  @@map("product_variants")
+}
+
+model DeliveryTimeSlot {
+  id           String         @id @unique @default(uuid())
+  start_time   String
+  end_time     String
+  subscription Subscription[]
+
+  @@map("delivery_time_slots")
+}
+
+model DeliveryPreference {
+  id          String  @id @unique @default(uuid())
+  title       String
+  description String?
+
+  customers Customer[]
+
+  @@map("delivery_preferences")
+}
+
+enum FrequencyType {
+  daily
+  interval
+  flexible
+}
+
+// Subscription Model
+model Subscription {
+  // Unique identifier for the subscription
+  id String @id @default(uuid())
+
+  frequency_type FrequencyType
+
+  // Start date of the subscription
+  start_date DateTime
+
+  // Optional end date for the subscription
+  end_date DateTime?
+
+  // Quantity for each day of the week (0-6 representing Sun-Sat)
+  sunday             Int?
+  monday             Int?
+  tuesday            Int?
+  wednesday          Int?
+  thursday           Int?
+  friday             Int?
+  saturday           Int?
+  // Number of days to skip from the start day
+  delivery_intervals Int?
+
+  delivery_time_slot_id String?
+  delivery_time_slot    DeliveryTimeSlot? @relation(fields: [delivery_time_slot_id], references: [id])
+
+  // delivery_preference_id String?
+  // delivery_preference    DeliveryPreference? @relation(fields: [delivery_preference_id], references: [id])
+
+  delivery_notes         String?
+  delivery_voice_note_id String?
+  delivery_voice_note    File?   @relation(fields: [delivery_voice_note_id], references: [id])
+
+  // Define a relation to the associated product
+  // Foreign key referencing the associated product
+  product_id String
+  product    Product @relation(fields: [product_id], references: [id])
+
+  variant_id String?
+  variant    ProductVariation? @relation(fields: [variant_id], references: [id])
+
+  customer_id String?
+  customer    Customer? @relation(fields: [customer_id], references: [id])
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  deleted_at DateTime?
+
+  created_by String?
+  updated_by String?
+  deleted_by String?
+
+  status Status @default(DRAFT) // "publish", "draft" ,'trash'
+
+  @@map("subscriptions")
+}
+
+model Order {
+  id                  String  @id @default(uuid())
+  currency            String  @default("INR")
+  billing_address_id  String
+  shipping_address_id String
+  billing_address     Address @relation("BillingAddress", fields: [billing_address_id], references: [id])
+  shipping_address    Address @relation("ShippingAddress", fields: [shipping_address_id], references: [id])
+  payment_method      String?
+  transaction_id      String? @unique
+
+  discount_total     Decimal @default(0.00) @db.Decimal(10, 2)
+  shipping_total     Decimal @default(0.00) @db.Decimal(10, 2)
+  prices_include_tax Boolean @default(true)
+  total              Decimal @default(0.00) @db.Decimal(10, 2)
+
+  customer_id String?
+  customer    Customer? @relation(fields: [customer_id], references: [id])
+
+  date_paid      DateTime?
+  date_completed DateTime?
+  cart_hash      String?
+
+  status OrderStatus @default(PENDING) // "pending", "failed", "processing", "completed", "on-hold", "cancelled", "refunded", "failed", "trash"
+
+  order_items_line OrderItem[]
+  shipping_line    Shipping?
+  coupons_line     Coupon[]    @relation("OrderCoupon")
+  refund_line      Refund?
+  //**/
+  created_at       DateTime    @default(now())
+  updated_at       DateTime    @updatedAt
+  deleted_at       DateTime?
+
+  @@map("orders")
+}
+
+model OrderItem {
+  id              String            @id @default(uuid())
+  order_id        String
+  order           Order             @relation(fields: [order_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  item_id         String
+  item            Product           @relation(fields: [item_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  item_variant_id String?
+  item_variant    ProductVariation? @relation(fields: [item_variant_id], references: [id])
+  quantity        Int               @default(1)
+  subtotal        Decimal           @default(0.00) @db.Decimal(10, 2)
+  total           Decimal           @default(0.00) @db.Decimal(10, 2)
+
+  @@map("order_items")
+}
+
+model Refund {
+  id       String  @id @default(uuid())
+  reason   String
+  total    Decimal @default(0.00) @db.Decimal(10, 2)
+  order_id String  @unique
+  order    Order   @relation(fields: [order_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@map("refunds")
+}
+
+model Shipping {
+  id              String  @id @default(uuid())
+  shipping_method String
+  shipping_id     String  @unique
+  total           Decimal @default(0.00) @db.Decimal(10, 2)
+  order_id        String  @unique
+  order           Order   @relation(fields: [order_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@map("shippings")
+}
+
+model Coupon {
+  id         String    @id @default(uuid())
+  code       String    @unique
+  amount     Decimal   @default(0.00) @db.Decimal(10, 2)
+  orders     Order[]   @relation("OrderCoupon")
+  expires_at DateTime?
+  min_amount Decimal   @default(0.00) @db.Decimal(10, 2)
+
+  @@map("coupons")
+}
+
+model Meta {
+  id    String @id @default(uuid())
+  key   String @unique
+  value String
+
+  @@map("metas")
+}
+
+model User {
+  id       String   @id @default(uuid())
+  name     String   @db.VarChar(255)
+  email    String   @unique
+  photo    String?  @default("default.png")
+  verified Boolean? @default(false)
+
+  password String
+  role     RoleEnumType? @default(user)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  provider String?
+  posts    Post[]
+
+  @@map(name: "users")
+}
+
+enum RoleEnumType {
+  user
+  admin
+}
+
+model Post {
+  id        String   @id @default(uuid())
+  title     String   @db.VarChar(255)
+  content   String
+  category  String
+  image     String
+  published Boolean  @default(false)
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map(name: "posts")
+}
+

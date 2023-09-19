@@ -1,0 +1,691 @@
+[
+  {
+    "title": "Cow Milk",
+    "type": "VARIABLE",
+    "status": "PUBLISH",
+    "category_id": "1",
+    "sku": "COMI-001",
+    "regular_price": 29.0,
+    "sale_price": 29.0,
+    "variations": {
+      "create": [
+        {
+          "regular_price": 29.0,
+          "sale_price": 29.0,
+          "size": "500ml",
+          "default": true,
+          "sku": "COMI-001-500",
+          "stock_quantity": 10
+        },
+        {
+          "regular_price": 29.0,
+          "sale_price": 29.0,
+          "size": "1000ml",
+          "sku": "COMI-001-1000",
+          "stock_quantity": 10
+        }
+      ]
+    }
+  },
+  {
+    "title": "Cow Milk Bottle",
+    "category_id": "1",
+    "type": "VARIABLE",
+    "status": "PUBLISH",
+    "sku": "MILK-CMP-001",
+    "regular_price": 29.0,
+    "sale_price": 29.0,
+    "variations": {
+      "create": [
+        {
+          "regular_price": 18.0,
+          "sale_price": 18.0,
+          "size": "250ml",
+          "default": true,
+          "sku": "MILK-CMP-001",
+          "stock_quantity": 10
+        },
+        {
+          "regular_price": 29.0,
+          "sale_price": 29.0,
+          "size": "500ml",
+          "sku": "MILK-CMP-002",
+          "stock_quantity": 10
+        }
+      ]
+    }
+  },
+  {
+    "title": "Full Cream Milk",
+    "category_id": "1",
+    "type": "VARIABLE",
+    "sku": "140",
+    "regular_price": 10,
+    "sale_price": 10,
+    "variations": {
+      "create": [
+        {
+          "regular_price": 10.0,
+          "sale_price": 10.0,
+          "size": "140ML",
+          "default": true,
+          "sku": "MILK-FCM-000",
+          "stock_quantity": 10
+        },
+        {
+          "regular_price": 16.0,
+          "sale_price": 16.0,
+          "size": "250LTR",
+          "sku": "MILK-FCM-001",
+          "stock_quantity": 10
+        },
+        {
+          "regular_price": 36.0,
+          "sale_price": 36.0,
+          "size": "500ML",
+          "sku": "MILK-FCM-002",
+          "stock_quantity": 10
+        },
+        {
+          "regular_price": 72,
+          "sale_price": 72,
+          "size": "1000ML",
+          "sku": "MILK-FCM-003",
+          "stock_quantity": 10
+        },
+        {
+          "regular_price": 355,
+          "sale_price": 355,
+          "size": "5000ML",
+          "sku": "MILK-FCM-004",
+          "stock_quantity": 10
+        }
+      ]
+    }
+  },
+  {
+    "title": "Standadized Milk",
+    "category_id": "1",
+    "type": "VARIABLE",
+    "sku": "150",
+    "regular_price": 10,
+    "sale_price": 10,
+    "variations": {
+      "create": [
+        {
+          "regular_price": 10,
+          "sale_price": 10,
+          "size": "150ML",
+          "default": true,
+          "sku": "MILK-FCM-000",
+          "stock_quantity": 10
+        },
+        {
+          "regular_price": 32,
+          "sale_price": 32,
+          "size": "500ML",
+          "default": false,
+          "sku": "MILK-FCM-001",
+          "stock_quantity": 10
+        },
+        {
+          "regular_price": 64,
+          "sale_price": 64,
+          "size": "1000ML",
+          "default": false,
+          "sku": "MILK-FCM-002",
+          "stock_quantity": 10
+        },
+        {
+          "regular_price": 315,
+          "sale_price": 315,
+          "size": "5000ML",
+          "default": false,
+          "sku": "MILK-FCM-003",
+          "stock_quantity": 10
+        }
+      ]
+    }
+  },
+  {
+    "title": "Toned Milk",
+    "type": "VARIABLE",
+    "sku": "180",
+    "regular_price": 10,
+    "sale_price": 10,
+    "category_id": "1",
+    "variations": {
+      "create": [
+        {
+          "regular_price": 10,
+          "sale_price": 10,
+          "size": "180ML",
+          "default": true,
+          "sku": "MILK-FCM-000",
+          "stock_quantity": 10
+        },
+        {
+          "regular_price": 14,
+          "sale_price": 14,
+          "size": "250ML",
+          "default": false,
+          "sku": "MILK-FCM-001",
+          "stock_quantity": 10
+        },
+        {
+          "regular_price": 28,
+          "sale_price": 28,
+          "size": "500ML",
+          "default": false,
+          "sku": "MILK-FCM-002",
+          "stock_quantity": 10
+        },
+        {
+          "regular_price": 24,
+          "sale_price": 24,
+          "size": "450ML",
+          "default": false,
+          "sku": "MILK-FCM-003",
+          "stock_quantity": 10
+        },
+        {
+          "regular_price": 46,
+          "sale_price": 46,
+          "size": "950ML",
+          "default": false,
+          "sku": "MILK-FCM-004",
+          "stock_quantity": 10
+        }
+      ]
+    }
+  },
+  {
+    "title": "Cup Curd",
+    "type": "VARIABLE",
+    "sku": "50",
+    "regular_price": 144,
+    "sale_price": 144,
+    "category_id": "2",
+    "variations": {
+      "create": [
+        {
+          "regular_price": 144,
+          "sale_price": 144,
+          "size": "50GRM",
+          "default": true,
+          "sku": "MILK-FCM-000",
+          "stock_quantity": 10
+        },
+        {
+          "regular_price": 120,
+          "sale_price": 120,
+          "size": "100GRM",
+          "default": false,
+          "sku": "MILK-FCM-001",
+          "stock_quantity": 10
+        }
+      ]
+    }
+  },
+  {
+    "title": "Curd",
+    "type": "VARIABLE",
+    "sku": "130",
+    "regular_price": 10,
+    "sale_price": 10,
+    "category_id": "2",
+    "variations": {
+      "create": [
+        {
+          "regular_price": 10,
+          "sale_price": 10,
+          "size": "130GRM",
+          "default": true,
+          "sku": "MILK-FCM-000",
+          "stock_quantity": 10
+        },
+        {
+          "regular_price": 35,
+          "sale_price": 35,
+          "size": "450GRM",
+          "default": false,
+          "sku": "MILK-FCM-001",
+          "stock_quantity": 10
+        },
+        {
+          "regular_price": 72,
+          "sale_price": 72,
+          "size": "1KG",
+          "default": false,
+          "sku": "MILK-FCM-002",
+          "stock_quantity": 10
+        }
+      ]
+    }
+  },
+  {
+    "title": "Slim Curd",
+    "type": "VARIABLE",
+    "sku": "450",
+    "regular_price": 34,
+    "sale_price": 34,
+    "category_id": "2",
+    "variations": {
+      "create": [
+        {
+          "regular_price": 34,
+          "sale_price": 34,
+          "size": "450GRM",
+          "default": true,
+          "sku": "MILK-FCM-000",
+          "stock_quantity": 10
+        },
+        {
+          "regular_price": 65,
+          "sale_price": 65,
+          "size": "950GRM",
+          "default": false,
+          "sku": "MILK-FCM-001",
+          "stock_quantity": 10
+        }
+      ]
+    }
+  },
+  {
+    "title": "Bucket Curd",
+    "type": "VARIABLE",
+    "sku": "5",
+    "regular_price": 320,
+    "sale_price": 320,
+    "category_id": "2",
+    "variations": {
+      "create": [
+        {
+          "regular_price": 320,
+          "sale_price": 320,
+          "size": "5KG",
+          "default": true,
+          "sku": "MILK-FCM-000",
+          "stock_quantity": 10
+        },
+        {
+          "regular_price": 630,
+          "sale_price": 630,
+          "size": "10KG",
+          "default": false,
+          "sku": "MILK-FCM-001",
+          "stock_quantity": 10
+        }
+      ]
+    }
+  },
+  {
+    "title": "Butter Milk",
+    "type": "VARIABLE",
+    "sku": "180",
+    "regular_price": 8,
+    "sale_price": 8,
+    "category_id": "35",
+    "variations": {
+      "create": [
+        {
+          "regular_price": 8,
+          "sale_price": 8,
+          "size": "180ML",
+          "default": true,
+          "sku": "MILK-FCM-000",
+          "stock_quantity": 10
+        },
+        {
+          "regular_price": 12,
+          "sale_price": 12,
+          "size": "200ML",
+          "default": false,
+          "sku": "MILK-FCM-001",
+          "stock_quantity": 10
+        }
+      ]
+    }
+  },
+  {
+    "title": "Butter",
+    "type": "VARIABLE",
+    "sku": "100",
+    "regular_price": 69,
+    "sale_price": 69,
+    "category_id": "3",
+    "variations": {
+      "create": [
+        {
+          "regular_price": 69,
+          "sale_price": 69,
+          "size": "100GRM",
+          "default": true,
+          "sku": "MILK-FCM-000",
+          "stock_quantity": 10
+        },
+        {
+          "regular_price": 136,
+          "sale_price": 136,
+          "size": "200GRM",
+          "default": false,
+          "sku": "MILK-FCM-001",
+          "stock_quantity": 10
+        },
+        {
+          "regular_price": 305,
+          "sale_price": 305,
+          "size": "500GRM",
+          "default": false,
+          "sku": "MILK-FCM-002",
+          "stock_quantity": 10
+        },
+        {
+          "regular_price": 600,
+          "sale_price": 600,
+          "size": "1KG",
+          "default": false,
+          "sku": "MILK-FCM-003",
+          "stock_quantity": 10
+        }
+      ]
+    }
+  },
+  {
+    "title": "Ghee",
+    "type": "VARIABLE",
+    "sku": "13",
+    "regular_price": 10,
+    "sale_price": 10,
+    "category_id": "4",
+    "variations": {
+      "create": [
+        {
+          "regular_price": 10,
+          "sale_price": 10,
+          "size": "13ML",
+          "default": true,
+          "sku": "MILK-FCM-000",
+          "stock_quantity": 10
+        },
+        {
+          "regular_price": 52,
+          "sale_price": 52,
+          "size": "50ML",
+          "default": false,
+          "sku": "MILK-FCM-001",
+          "stock_quantity": 10
+        },
+        {
+          "regular_price": 96,
+          "sale_price": 96,
+          "size": "100ML",
+          "default": false,
+          "sku": "MILK-FCM-002",
+          "stock_quantity": 10
+        },
+        {
+          "regular_price": 182,
+          "sale_price": 182,
+          "size": "200ML",
+          "default": false,
+          "sku": "MILK-FCM-003",
+          "stock_quantity": 10
+        },
+        {
+          "regular_price": 430,
+          "sale_price": 430,
+          "size": "500ML",
+          "default": false,
+          "sku": "MILK-FCM-004",
+          "stock_quantity": 10
+        },
+        {
+          "regular_price": 835,
+          "sale_price": 835,
+          "size": "1LTR",
+          "default": false,
+          "sku": "MILK-FCM-005",
+          "stock_quantity": 10
+        },
+        {
+          "regular_price": 4000,
+          "sale_price": 4000,
+          "size": "5LTR",
+          "default": false,
+          "sku": "MILK-FCM-006",
+          "stock_quantity": 10
+        },
+        {
+          "regular_price": 10750,
+          "sale_price": 10750,
+          "size": "15LTR",
+          "default": false,
+          "sku": "MILK-FCM-007",
+          "stock_quantity": 10
+        }
+      ]
+    }
+  },
+  {
+    "title": "Paneer",
+    "type": "VARIABLE",
+    "sku": "200",
+    "regular_price": 108,
+    "sale_price": 108,
+    "category_id": "5",
+    "variations": {
+      "create": [
+        {
+          "regular_price": 108,
+          "sale_price": 108,
+          "size": "200GRM",
+          "default": true,
+          "sku": "MILK-FCM-000",
+          "stock_quantity": 10
+        },
+        {
+          "regular_price": 432,
+          "sale_price": 432,
+          "size": "1KG",
+          "default": false,
+          "sku": "MILK-FCM-001",
+          "stock_quantity": 10
+        }
+      ]
+    }
+  },
+  {
+    "title": "Milk Burfi",
+    "type": "VARIABLE",
+    "sku": "250",
+    "regular_price": 150,
+    "sale_price": 150,
+    "category_id": "6",
+    "variations": {
+      "create": [
+        {
+          "regular_price": 150,
+          "sale_price": 150,
+          "size": "250GRM",
+          "default": true,
+          "sku": "MILK-FCM-000",
+          "stock_quantity": 10
+        },
+        {
+          "regular_price": 270,
+          "sale_price": 270,
+          "size": "500GRM",
+          "default": false,
+          "sku": "MILK-FCM-001",
+          "stock_quantity": 10
+        }
+      ]
+    }
+  },
+  {
+    "title": "Chokhova",
+    "type": "VARIABLE",
+    "sku": "250",
+    "regular_price": 161,
+    "sale_price": 161,
+    "category_id": "6",
+    "variations": {
+      "create": [
+        {
+          "regular_price": 161,
+          "sale_price": 161,
+          "size": "250GRM",
+          "default": true,
+          "sku": "MILK-FCM-000",
+          "stock_quantity": 10
+        },
+        {
+          "regular_price": 322,
+          "sale_price": 322,
+          "size": "500GRM",
+          "default": false,
+          "sku": "MILK-FCM-001",
+          "stock_quantity": 10
+        }
+      ]
+    }
+  },
+  {
+    "title": "Chokhova",
+    "type": "VARIABLE",
+    "sku": "250",
+    "regular_price": 161,
+    "sale_price": 161,
+    "category_id": "6",
+    "variations": {
+      "create": [
+        {
+          "regular_price": 161,
+          "sale_price": 161,
+          "size": "250GRM",
+          "default": true,
+          "sku": "MILK-FCM-000",
+          "stock_quantity": 10
+        },
+        {
+          "regular_price": 322,
+          "sale_price": 322,
+          "size": "500GRM",
+          "default": false,
+          "sku": "MILK-FCM-001",
+          "stock_quantity": 10
+        }
+      ]
+    }
+  },
+  {
+    "title": "Orange Burst",
+    "type": "VARIABLE",
+    "sku": "250",
+    "regular_price": 125,
+    "sale_price": 125,
+    "category_id": "6",
+    "variations": {
+      "create": [
+        {
+          "regular_price": 125,
+          "sale_price": 125,
+          "size": "250GRM",
+          "default": true,
+          "sku": "MILK-FCM-000",
+          "stock_quantity": 10
+        },
+        {
+          "regular_price": 250,
+          "sale_price": 250,
+          "size": "500GRM",
+          "default": false,
+          "sku": "MILK-FCM-001",
+          "stock_quantity": 10
+        }
+      ]
+    }
+  },
+  {
+    "title": "Milky Dates",
+    "type": "VARIABLE",
+    "sku": "250",
+    "regular_price": 140,
+    "sale_price": 140,
+    "category_id": "6",
+    "variations": {
+      "create": [
+        {
+          "regular_price": 140,
+          "sale_price": 140,
+          "size": "250GRM",
+          "default": true,
+          "sku": "MILK-FCM-000",
+          "stock_quantity": 10
+        },
+        {
+          "regular_price": 280,
+          "sale_price": 280,
+          "size": "500GRM",
+          "default": false,
+          "sku": "MILK-FCM-001",
+          "stock_quantity": 10
+        }
+      ]
+    }
+  },
+  {
+    "title": "Combo",
+    "type": "VARIABLE",
+    "sku": "250",
+    "regular_price": 150,
+    "sale_price": 150,
+    "category_id": "6",
+    "variations": {
+      "create": [
+        {
+          "regular_price": 150,
+          "sale_price": 150,
+          "size": "250GRM",
+          "default": true,
+          "sku": "MILK-FCM-000",
+          "stock_quantity": 10
+        },
+        {
+          "regular_price": 260,
+          "sale_price": 260,
+          "size": "500GRM",
+          "default": false,
+          "sku": "MILK-FCM-001",
+          "stock_quantity": 10
+        },
+        {
+          "regular_price": 260,
+          "sale_price": 260,
+          "size": "200GRM",
+          "default": false,
+          "sku": "MILK-FCM-002",
+          "stock_quantity": 10
+        },
+        {
+          "regular_price": 260,
+          "sale_price": 260,
+          "size": "400GRM",
+          "default": false,
+          "sku": "MILK-FCM-003",
+          "stock_quantity": 10
+        }
+      ]
+    }
+  },
+  {
+    "title": "Low Fat Paneer",
+    "type": "SIMPLE",
+    "regular_price": "360.00",
+    "sale_price": "360.00",
+    "category_id": "5",
+    "sku": "PANR-LFP-001",
+    "size": "1KG"
+  }
+]
